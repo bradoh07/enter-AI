@@ -7,13 +7,28 @@ project-root/
   ├── i18n.config.json       # i18n manifest for supported locales and language metadata
   ├── public/
   │   └── locales/           # public/locales/{code}.json translation files
+  ├── supabase/
+  │   ├── config.toml        # backend function settings
+  │   └── functions/         # server-side backend functions
+  │       ├── project-scoping/       # AI: project-specific intake questions
+  │       └── simulation-insights/   # AI: risks, feasibility, improvements
   ├── src/
   │   ├── components/        # All reusable UI components
-  │   │   └── ui/            # Prebuilt and custom UI components, grouped by function
-  │   ├── hooks/             # Custom React hooks
+  │   │   ├── ui/            # Prebuilt and custom UI components, grouped by function
+  │   │   ├── common/        # Cross-page primitives (cards, badges, headers, empty states)
+  │   │   ├── form/          # Input controls: intake fields, chips, line-item editors
+  │   │   ├── layout/        # App shell: sidebar, topbar, layout, protected route
+  │   │   └── simulation/    # Charts, KPI grid, scenario tables, AI panels
+  │   ├── hooks/             # Custom React hooks (data access + mutations)
   │   ├── i18n/              # i18n runtime: config.ts (entry) + util.ts (helpers)
+  │   ├── integrations/      # Generated backend client (do not edit)
   │   ├── lib/               # Utility functions and libraries
+  │   │   ├── ai/            # AI payload builders, typed invokers, response types
+  │   │   ├── api/           # Row/domain types and status normalisers
+  │   │   ├── domain/        # Selectable option values + literal-key label lookups
+  │   │   └── simulation/    # Deterministic engine: types, engine, metrics, sensitivity
   │   ├── pages/             # Application pages (each page in its own subdirectory)
+  │   ├── providers/         # React context providers (auth session)
   │   ├── App.tsx            # Main app component, sets up route providers
   │   ├── router.tsx         # Router config, sets up routing
   │   ├── main.tsx           # Entry point for the React app
@@ -39,8 +54,18 @@ project-root/
   - `util.ts` holds pure helpers parsed from the manifest: `fallbackLng`, `supportedLngs`, `languageOptions`, `normalizeLanguage`, `getLanguageDirection`, plus types.
   - Components use the official `useTranslation()` from `react-i18next` directly; there is no project-specific `useT` wrapper.
 - **src/lib/**: Utility functions and libraries that are not React components or hooks.
+  - **lib/simulation/**: The deterministic financial engine. Pure functions only — the same input always
+    produces the same output, with no network or AI dependency. Every figure the user sees comes from here.
+    AI output is stored separately (`simulation_runs.ai_insights`) and must never overwrite a computed value.
+  - **lib/ai/**: Payload builders and typed invokers for the backend AI functions. A failing or disabled AI is
+    reported as `unavailable` or `error` and rendered as such; never synthesise AI-shaped output.
+  - **lib/domain/**: Selectable option values plus label lookups. Labels are resolved through literal `t()`
+    switches so the i18n scanner can see every key.
+- **src/providers/**: React context providers. `auth-provider.tsx` owns the session and exposes `useAuth()`.
 - **src/pages/**: All route-level pages.  
   - *Each page should have its own subdirectory if it contains more than a single file or has related logic/components.*
+  - **pages/projects/detail/**, **pages/simulations/new/**: page-local subcomponents live beside their page.
+- **supabase/functions/**: Backend functions, one responsibility each. Read the AI/backend skills before editing.
 - **src/App.tsx**: Sets up global providers.
 - **src/router.tsx**: Sets up routing.
 - **src/main.tsx**: Application entry point.
@@ -113,6 +138,15 @@ Whenever a new module (such as a component, hook, or utility) or a new page is a
 - **Documentation:**  
   - Add comments for complex logic.
   - Document the purpose of each module at the top of the file if not obvious.
+
+## Domain notes
+
+- Every numeric result on screen is computed by `src/lib/simulation/engine.ts` and is badged as computed.
+  Anything written by a model is badged as an AI estimate and lives in its own panel.
+- `project_inputs.data` is the canonical engine input; `simulation_runs` keeps an immutable snapshot per run,
+  which is what makes project-to-project and run-to-run comparison possible.
+- `scenario_overrides` on a project (and the adjustment recorded inside each stored scenario) are what bend the
+  base inputs into the optimistic and pessimistic cases.
 
 ## Example: Adding a New "Profile" Page
 

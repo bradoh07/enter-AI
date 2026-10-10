@@ -1,0 +1,4 @@
+-- Removes ONLY the throwaway account created moments ago for end-to-end verification
+-- of the deployed backend functions. Identified by this exact UUID; nothing else matches.
+delete from public.profiles where id = 'c1b2e488-d0f9-42f1-9766-95fe5635f3b8';
+delete from auth.users where id = 'c1b2e488-d0f9-42f1-9766-95fe5635f3b8';

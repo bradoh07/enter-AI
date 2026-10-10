@@ -3360,7 +3360,270 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          business_models: string[]
+          business_stage: string | null
+          company_name: string | null
+          company_size: string | null
+          created_at: string
+          currency: string
+          default_assumptions: Json
+          display_name: string | null
+          founding_experience: string | null
+          id: string
+          interest_sectors: string[]
+          locale: string
+          onboarding_completed: boolean
+          planned_investment: number | null
+          updated_at: string
+          user_type: string
+        }
+        Insert: {
+          business_models?: string[]
+          business_stage?: string | null
+          company_name?: string | null
+          company_size?: string | null
+          created_at?: string
+          currency?: string
+          default_assumptions?: Json
+          display_name?: string | null
+          founding_experience?: string | null
+          id: string
+          interest_sectors?: string[]
+          locale?: string
+          onboarding_completed?: boolean
+          planned_investment?: number | null
+          updated_at?: string
+          user_type?: string
+        }
+        Update: {
+          business_models?: string[]
+          business_stage?: string | null
+          company_name?: string | null
+          company_size?: string | null
+          created_at?: string
+          currency?: string
+          default_assumptions?: Json
+          display_name?: string | null
+          founding_experience?: string | null
+          id?: string
+          interest_sectors?: string[]
+          locale?: string
+          onboarding_completed?: boolean
+          planned_investment?: number | null
+          updated_at?: string
+          user_type?: string
+        }
+        Relationships: []
+      }
+      project_inputs: {
+        Row: {
+          completed: boolean
+          created_at: string
+          data: Json
+          id: string
+          project_id: string
+          unknown_fields: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          data?: Json
+          id?: string
+          project_id: string
+          unknown_fields?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          data?: Json
+          id?: string
+          project_id?: string
+          unknown_fields?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_inputs_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_questions: {
+        Row: {
+          created_at: string
+          help_text: string | null
+          id: string
+          input_type: string
+          label: string
+          maps_to: string | null
+          options: Json
+          project_id: string
+          question_key: string
+          required: boolean
+          sort_order: number
+          source: string
+          unit: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          help_text?: string | null
+          id?: string
+          input_type?: string
+          label: string
+          maps_to?: string | null
+          options?: Json
+          project_id: string
+          question_key: string
+          required?: boolean
+          sort_order?: number
+          source?: string
+          unit?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          help_text?: string | null
+          id?: string
+          input_type?: string
+          label?: string
+          maps_to?: string | null
+          options?: Json
+          project_id?: string
+          question_key?: string
+          required?: boolean
+          sort_order?: number
+          source?: string
+          unit?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_questions_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          ai_question_status: string
+          created_at: string
+          currency: string
+          horizon_months: number
+          id: string
+          idea: string
+          name: string
+          scale: string | null
+          scenario_overrides: Json
+          sectors: string[]
+          stage: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_question_status?: string
+          created_at?: string
+          currency?: string
+          horizon_months?: number
+          id?: string
+          idea?: string
+          name: string
+          scale?: string | null
+          scenario_overrides?: Json
+          sectors?: string[]
+          stage?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_question_status?: string
+          created_at?: string
+          currency?: string
+          horizon_months?: number
+          id?: string
+          idea?: string
+          name?: string
+          scale?: string | null
+          scenario_overrides?: Json
+          sectors?: string[]
+          stage?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      simulation_runs: {
+        Row: {
+          ai_error: string | null
+          ai_insights: Json | null
+          ai_model: string | null
+          ai_status: string
+          assumptions: Json
+          created_at: string
+          engine_version: string
+          id: string
+          input_snapshot: Json
+          label: string | null
+          project_id: string
+          results: Json
+          run_number: number
+          user_id: string
+        }
+        Insert: {
+          ai_error?: string | null
+          ai_insights?: Json | null
+          ai_model?: string | null
+          ai_status?: string
+          assumptions?: Json
+          created_at?: string
+          engine_version?: string
+          id?: string
+          input_snapshot?: Json
+          label?: string | null
+          project_id: string
+          results?: Json
+          run_number?: number
+          user_id: string
+        }
+        Update: {
+          ai_error?: string | null
+          ai_insights?: Json | null
+          ai_model?: string | null
+          ai_status?: string
+          assumptions?: Json
+          created_at?: string
+          engine_version?: string
+          id?: string
+          input_snapshot?: Json
+          label?: string | null
+          project_id?: string
+          results?: Json
+          run_number?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "simulation_runs_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

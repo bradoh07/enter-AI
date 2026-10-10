@@ -1,0 +1,4 @@
+-- Removes ONLY the two throwaway accounts created moments ago for the RLS / data-path
+-- verification. Matched by their exact UUIDs; no project or run rows remain (cascade already proven).
+delete from public.profiles where id in ('f4e7d0f8-ce9a-4123-ad3c-5f8bd8397c7e', '8ea55ff2-6927-48b9-b8e6-f52a86b209a2');
+delete from auth.users where id in ('f4e7d0f8-ce9a-4123-ad3c-5f8bd8397c7e', '8ea55ff2-6927-48b9-b8e6-f52a86b209a2');
