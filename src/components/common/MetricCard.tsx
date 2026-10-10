@@ -20,6 +20,10 @@ const toneClass: Record<NonNullable<MetricCardProps["tone"]>, string> = {
   warning: "text-warning",
 };
 
+/**
+ * A single figure with its source. Values stay in the sans stack with tabular
+ * figures so columns of numbers line up and stay comparable.
+ */
 export const MetricCard = ({
   label,
   value,
@@ -28,26 +32,34 @@ export const MetricCard = ({
   tone = "default",
   className,
 }: MetricCardProps) => (
-  <Card className={cn("shadow-panel", className)}>
+  <Card className={cn(className)}>
     <CardHeader className="gap-1 space-y-0 pb-2">
       <div className="flex items-start justify-between gap-2">
-        <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        {/* Uniform label height so a row of tiles keeps its values on one line */}
+        <CardTitle className="min-h-[2.25rem] text-[11px] font-medium uppercase leading-snug tracking-[0.08em] text-muted-foreground">
           {label}
         </CardTitle>
         {badge}
       </div>
     </CardHeader>
-    <CardContent className="space-y-1">
-      <div className={cn("tabular text-2xl font-semibold tracking-tight", toneClass[tone])}>
+    <CardContent className="space-y-1.5">
+      <div
+        className={cn(
+          "tabular text-[1.6rem] font-semibold leading-tight tracking-tight",
+          toneClass[tone],
+        )}
+      >
         {value}
       </div>
-      {hint ? <div className="text-xs text-muted-foreground">{hint}</div> : null}
+      {hint ? (
+        <div className="text-xs leading-snug text-muted-foreground">{hint}</div>
+      ) : null}
     </CardContent>
   </Card>
 );
 
 export const MetricCardSkeleton = () => (
-  <Card className="shadow-panel">
+  <Card>
     <CardHeader className="pb-2">
       <Skeleton className="h-3 w-24" />
     </CardHeader>

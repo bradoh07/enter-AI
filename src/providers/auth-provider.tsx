@@ -26,6 +26,10 @@ type AuthContextValue = {
   signIn: (email: string, password: string) => Promise<string | null>;
   signUp: (args: SignUpArgs) => Promise<string | null>;
   signOut: () => Promise<void>;
+  /** Sends the account-recovery email. Returns an error message, or null when accepted. */
+  requestPasswordReset: (email: string) => Promise<string | null>;
+  /** Sets a new password for the signed-in user (used by the recovery link). */
+  setPassword: (password: string) => Promise<string | null>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -79,9 +83,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setSession(null);
   }, []);
 
+  const requestPasswordReset = useCallback(async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    return error ? error.message : null;
+  }, []);
+
+  const setPassword = useCallback(async (password: string) => {
+    const { error } = await supabase.auth.updateUser({ password });
+    return error ? error.message : null;
+  }, []);
+
   const value = useMemo<AuthContextValue>(
-    () => ({ user, session, initializing, signIn, signUp, signOut }),
-    [user, session, initializing, signIn, signUp, signOut],
+    () => ({
+      user,
+      session,
+      initializing,
+      signIn,
+      signUp,
+      signOut,
+      requestPasswordReset,
+      setPassword,
+    }),
+    [user, session, initializing, signIn, signUp, signOut, requestPasswordReset, setPassword],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

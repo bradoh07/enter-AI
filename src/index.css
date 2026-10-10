@@ -2,148 +2,173 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   Design system — warm Mediterranean editorial.
+   The five brand colours are declared once as exact values. Everything else in
+   the app reads semantic tokens only, so a screen can never invent its own hue.
+
+   Rule for legibility: fills and decoration use the exact brand value, while
+   text and control boundaries use a one-step deeper tone of the same hue
+   (--primary, --border, --input, --sky-ink). That is the only deviation, and it
+   keeps every pair at or above the WCAG contrast it needs.
+--------------------------------------------------------------------------- */
 @layer base {
   :root {
-    /* Surfaces — cool white to cool gray */
-    --background: 210 40% 98.5%;
-    --foreground: 218 47% 12%;
+    /* Exact brand values — referenced through the semantic tokens below. */
+    --brand-brown: 23 66% 22%; /* #5E3013 */
+    --brand-beige: 28 58% 68%; /* #DDAC80 */
+    --brand-terracotta: 27 53% 42%; /* #A56733 */
+    --brand-ivory: 40 46% 95%; /* #F8F4EC */
+    --brand-sky: 193 84% 72%; /* #7DDBF4 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 218 47% 12%;
+    /* Surfaces */
+    --background: 40 46% 95%; /* ivory */
+    --foreground: 23 66% 22%; /* deep brown */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 218 47% 12%;
+    /* Cards lift off the ivory page without introducing a grey step */
+    --card: 42 44% 97.5%;
+    --card-foreground: 23 66% 22%;
 
-    /* Deep navy brand */
-    --primary: 218 62% 20%;
-    --primary-foreground: 210 40% 98%;
-    --primary-glow: 217 55% 38%;
+    --popover: 42 44% 98%;
+    --popover-foreground: 23 66% 22%;
 
-    --secondary: 214 32% 95%;
-    --secondary-foreground: 218 47% 18%;
+    /* Action — terracotta deepened one step so ivory text on buttons clears AA */
+    --primary: 27 58% 36%;
+    --primary-foreground: 40 50% 97%;
 
-    --muted: 214 30% 96%;
-    --muted-foreground: 215 18% 42%;
+    /* Secondary button surface — the exact beige, with deep brown text */
+    --secondary: 28 58% 68%;
+    --secondary-foreground: 23 66% 20%;
 
-    --accent: 214 55% 96%;
-    --accent-foreground: 218 62% 22%;
+    --muted: 36 32% 91%;
+    --muted-foreground: 24 20% 38%;
 
-    --destructive: 0 66% 44%;
-    --destructive-foreground: 0 0% 100%;
+    /* Selected / hovered surface */
+    --accent: 30 46% 92%;
+    --accent-foreground: 27 58% 32%;
 
-    --success: 162 60% 28%;
-    --success-foreground: 0 0% 100%;
+    --destructive: 8 58% 38%;
+    --destructive-foreground: 40 50% 97%;
 
-    --warning: 32 84% 40%;
-    --warning-foreground: 0 0% 100%;
+    --success: 148 26% 30%;
+    --success-foreground: 40 50% 97%;
 
-    --info: 205 76% 36%;
-    --info-foreground: 0 0% 100%;
+    --warning: 36 66% 34%;
+    --warning-foreground: 40 50% 97%;
 
-    --border: 214 24% 89%;
-    --input: 214 24% 89%;
-    --ring: 218 62% 32%;
+    --info: 196 55% 30%;
+    --info-foreground: 40 50% 97%;
 
-    --radius: 0.625rem;
+    /* Boundaries — beige deepened a step so hairlines stay visible on ivory */
+    --border: 28 44% 64%;
+    --input: 28 42% 58%;
+    --ring: 27 58% 36%;
 
-    /* Scenario palette — cool, print-safe */
-    --scenario-optimistic: 199 80% 38%;
-    --scenario-base: 218 62% 24%;
-    --scenario-pessimistic: 220 12% 48%;
+    --radius: 0.5rem;
 
-    /* Chart palette */
-    --chart-1: 218 62% 24%;
-    --chart-2: 199 80% 42%;
-    --chart-3: 172 52% 34%;
-    --chart-4: 220 14% 62%;
-    --chart-5: 32 84% 46%;
+    /* Sky is for fills, areas and reference lines. --sky-ink is the legible
+       variant used wherever sky has to carry a stroke or text. */
+    --sky: 193 84% 72%;
+    --sky-ink: 196 62% 30%;
 
-    /* Gradients */
-    --gradient-navy: linear-gradient(135deg, hsl(218 62% 15%), hsl(218 55% 27%));
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%), hsl(214 32% 97.5%));
+    /* Scenario identity */
+    --scenario-optimistic: 27 58% 46%;
+    --scenario-base: 23 62% 28%;
+    --scenario-pessimistic: 28 13% 52%;
 
-    /* Elevation */
-    --shadow-elegant: 0 1px 2px hsl(218 62% 20% / 0.05),
-      0 14px 34px -16px hsl(218 62% 20% / 0.22);
-    --shadow-panel: 0 1px 3px hsl(218 62% 20% / 0.06),
-      0 4px 12px -8px hsl(218 62% 20% / 0.12);
+    /* Charts: brown primary, terracotta secondary, sky accent, beige baseline,
+       deep sky for lines that need contrast */
+    --chart-1: 23 62% 30%;
+    --chart-2: 27 53% 46%;
+    --chart-3: 193 84% 72%;
+    --chart-4: 28 40% 72%;
+    --chart-5: 196 62% 30%;
 
-    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Elevation — warm and restrained, never a heavy drop shadow */
+    --shadow-panel: 0 1px 2px hsl(23 40% 20% / 0.04),
+      0 2px 6px -4px hsl(23 40% 20% / 0.06);
+    --shadow-elegant: 0 1px 2px hsl(23 40% 20% / 0.05),
+      0 18px 40px -28px hsl(23 40% 20% / 0.25);
 
-    --sidebar-background: 218 62% 15%;
-    --sidebar-foreground: 214 32% 92%;
-    --sidebar-primary: 210 40% 98%;
-    --sidebar-primary-foreground: 218 62% 18%;
-    --sidebar-accent: 218 45% 24%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 218 40% 26%;
-    --sidebar-ring: 210 40% 70%;
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sidebar — ivory editorial rail */
+    --sidebar-background: 40 46% 95%;
+    --sidebar-foreground: 23 30% 32%;
+    --sidebar-primary: 23 66% 22%;
+    --sidebar-primary-foreground: 40 46% 95%;
+    --sidebar-accent: 30 46% 91%;
+    --sidebar-accent-foreground: 27 58% 34%;
+    --sidebar-border: 28 44% 68%;
+    --sidebar-ring: 27 58% 36%;
   }
 
+  /* No theme toggle is offered. These values exist so that if the class is ever
+     applied, the app turns warm-dark instead of falling back to navy. */
   .dark {
-    --background: 218 47% 8%;
-    --foreground: 210 40% 96%;
+    --background: 23 30% 10%;
+    --foreground: 40 42% 94%;
 
-    --card: 218 45% 11%;
-    --card-foreground: 210 40% 96%;
+    --card: 23 26% 13%;
+    --card-foreground: 40 42% 94%;
 
-    --popover: 218 45% 11%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 23 26% 13%;
+    --popover-foreground: 40 42% 94%;
 
-    --primary: 210 40% 96%;
-    --primary-foreground: 218 62% 16%;
+    --primary: 27 58% 52%;
+    --primary-foreground: 23 40% 10%;
 
-    --secondary: 218 35% 18%;
-    --secondary-foreground: 210 40% 96%;
+    --secondary: 28 30% 26%;
+    --secondary-foreground: 40 42% 94%;
 
-    --muted: 218 35% 18%;
-    --muted-foreground: 215 20% 68%;
+    --muted: 24 20% 18%;
+    --muted-foreground: 32 20% 68%;
 
-    --accent: 218 40% 22%;
-    --accent-foreground: 210 40% 96%;
+    --accent: 26 28% 20%;
+    --accent-foreground: 34 50% 78%;
 
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 8 52% 48%;
+    --destructive-foreground: 40 42% 96%;
 
-    --success: 162 50% 40%;
-    --success-foreground: 218 47% 8%;
+    --success: 148 26% 44%;
+    --success-foreground: 23 40% 10%;
 
-    --warning: 32 80% 52%;
-    --warning-foreground: 218 47% 8%;
+    --warning: 36 58% 52%;
+    --warning-foreground: 23 40% 10%;
 
-    --info: 205 70% 50%;
-    --info-foreground: 218 47% 8%;
+    --info: 196 50% 48%;
+    --info-foreground: 23 40% 10%;
 
-    --border: 218 30% 22%;
-    --input: 218 30% 22%;
-    --ring: 214 40% 60%;
+    --border: 26 20% 26%;
+    --input: 26 20% 30%;
+    --ring: 27 58% 52%;
 
-    --scenario-optimistic: 199 70% 52%;
-    --scenario-base: 214 30% 82%;
-    --scenario-pessimistic: 220 14% 56%;
+    --sky: 193 70% 60%;
+    --sky-ink: 193 60% 70%;
 
-    --chart-1: 214 30% 82%;
-    --chart-2: 199 70% 52%;
-    --chart-3: 172 45% 48%;
-    --chart-4: 220 14% 58%;
-    --chart-5: 32 80% 56%;
+    --scenario-optimistic: 27 58% 56%;
+    --scenario-base: 32 22% 78%;
+    --scenario-pessimistic: 28 14% 46%;
 
-    --gradient-navy: linear-gradient(135deg, hsl(218 62% 12%), hsl(218 50% 22%));
-    --gradient-subtle: linear-gradient(180deg, hsl(218 45% 11%), hsl(218 47% 8%));
+    --chart-1: 32 24% 78%;
+    --chart-2: 27 58% 56%;
+    --chart-3: 193 70% 60%;
+    --chart-4: 28 26% 52%;
+    --chart-5: 196 55% 62%;
 
-    --shadow-elegant: 0 1px 2px hsl(218 62% 2% / 0.4),
-      0 14px 34px -16px hsl(218 62% 2% / 0.6);
-    --shadow-panel: 0 1px 3px hsl(218 62% 2% / 0.35),
-      0 4px 12px -8px hsl(218 62% 2% / 0.45);
+    --shadow-panel: 0 1px 2px hsl(23 60% 2% / 0.4),
+      0 2px 6px -4px hsl(23 60% 2% / 0.5);
+    --shadow-elegant: 0 1px 2px hsl(23 60% 2% / 0.45),
+      0 18px 40px -28px hsl(23 60% 2% / 0.7);
 
-    --sidebar-background: 218 50% 9%;
-    --sidebar-foreground: 214 32% 92%;
-    --sidebar-primary: 210 40% 98%;
-    --sidebar-primary-foreground: 218 62% 16%;
-    --sidebar-accent: 218 40% 18%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 218 35% 20%;
-    --sidebar-ring: 214 40% 60%;
+    --sidebar-background: 23 26% 12%;
+    --sidebar-foreground: 32 20% 76%;
+    --sidebar-primary: 40 42% 94%;
+    --sidebar-primary-foreground: 23 40% 12%;
+    --sidebar-accent: 26 28% 20%;
+    --sidebar-accent-foreground: 34 50% 80%;
+    --sidebar-border: 26 20% 24%;
+    --sidebar-ring: 27 58% 52%;
   }
 }
 
@@ -157,6 +182,13 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  /* Editorial serif is reserved for page and section titles. Body copy, labels
+     and every figure stay in the sans stack for readability. */
+  .font-display {
+    font-family: "Fraunces", "Noto Serif KR", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+  }
+
   /* Financial figures stay aligned across rows and columns */
   .tabular {
     font-variant-numeric: tabular-nums;
@@ -165,20 +197,31 @@
 }
 
 @layer utilities {
-  .bg-gradient-navy {
-    background-image: var(--gradient-navy);
-  }
-
-  .bg-gradient-subtle {
-    background-image: var(--gradient-subtle);
-  }
-
   .shadow-elegant {
     box-shadow: var(--shadow-elegant);
   }
 
   .shadow-panel {
     box-shadow: var(--shadow-panel);
+  }
+
+  /* Warm scrim that keeps the hero copy legible over photography. Functional,
+     not decorative — it is the only gradient in the app. Bottom-weighted so the
+     phrases sit on the darkest part, with a left wash because the copy is
+     left-aligned. */
+  .hero-scrim {
+    background-image: linear-gradient(
+        to top,
+        hsl(23 66% 11% / 0.72) 0%,
+        hsl(23 66% 13% / 0.26) 40%,
+        hsl(23 66% 15% / 0) 80%
+      ),
+      linear-gradient(
+        to right,
+        hsl(23 66% 11% / 0.44) 0%,
+        hsl(23 66% 11% / 0.04) 46%,
+        hsl(23 66% 11% / 0) 100%
+      );
   }
 }
 
@@ -197,6 +240,13 @@ body,
 
   body {
     background: hsl(0 0% 100%);
+    color: hsl(23 66% 18%);
+  }
+
+  /* Keep series colours and rules in the exported PDF */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .print-hidden {
@@ -209,6 +259,8 @@ body,
     padding: 0 !important;
     margin: 0 !important;
     max-width: none !important;
+    background: hsl(0 0% 100%) !important;
+    border-radius: 0 !important;
   }
 
   .print-break-before {

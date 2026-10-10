@@ -12,6 +12,7 @@ import { ProtectedRoute } from "./components/layout/ProtectedRoute";
  */
 const LoginPage = lazy(() => import("./pages/login"));
 const SignupPage = lazy(() => import("./pages/signup"));
+const ResetPasswordPage = lazy(() => import("./pages/reset-password"));
 const OnboardingPage = lazy(() => import("./pages/onboarding"));
 const DashboardPage = lazy(() => import("./pages/dashboard"));
 const ProjectsPage = lazy(() => import("./pages/projects"));
@@ -40,6 +41,15 @@ export const routers = [
     path: "/signup",
     name: "signup",
     element: suspense(<SignupPage />),
+  },
+  {
+    // Reachable only with a recovery session; ProtectedRoute sends everyone
+    // else back to sign-in. Incomplete onboarding must not block the reset.
+    path: "/reset-password",
+    name: "resetPassword",
+    element: (
+      <ProtectedRoute allowIncompleteProfile>{suspense(<ResetPasswordPage />)}</ProtectedRoute>
+    ),
   },
   {
     path: "/onboarding",

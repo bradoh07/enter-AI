@@ -1,0 +1,8 @@
+-- Removes ONLY the throwaway design-verification account created moments ago
+-- (design-verify@example.invalid / e2409427-b5f7-4e21-b6d6-bc20d0a21b62).
+-- Ownership was verified first: the single project, its input row and its run all
+-- belong to this UUID. The real account bradoh07@kookmin.ac.kr and its profile are
+-- deliberately NOT matched and remain untouched.
+delete from public.projects where user_id = 'e2409427-b5f7-4e21-b6d6-bc20d0a21b62';
+delete from public.profiles where id = 'e2409427-b5f7-4e21-b6d6-bc20d0a21b62';
+delete from auth.users where id = 'e2409427-b5f7-4e21-b6d6-bc20d0a21b62';

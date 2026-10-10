@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 
-import { DataSourceBadge } from "@/components/common/DataSourceBadge";
 import {
   Table,
   TableBody,
@@ -44,12 +43,9 @@ export const SensitivityTable = ({
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <DataSourceBadge source="computed" />
-        <span className="text-xs text-muted-foreground">
-          {t("simulation.sensitivity.notice")}
-        </span>
-      </div>
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        {t("simulation.sensitivity.notice")}
+      </p>
 
       <div className="overflow-x-auto">
         <Table>

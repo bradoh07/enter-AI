@@ -1,11 +1,4 @@
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ReferenceLine,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { CartesianGrid, Line, LineChart, ReferenceLine, XAxis, YAxis } from "recharts";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -21,7 +14,8 @@ import type { CurrencyCode, SimulationResult } from "@/lib/simulation/types";
 
 /**
  * Monthly revenue against total cost for the base scenario. Where the two lines
- * cross is the month the business starts covering its own costs.
+ * cross is the month the business starts covering its own costs, and the dashed
+ * sky rule marks the break-even revenue level itself.
  */
 export const BreakEvenChart = ({
   result,
@@ -48,7 +42,7 @@ export const BreakEvenChart = ({
   }));
 
   const config = {
-    revenue: { label: t("simulation.series.revenue"), color: "hsl(var(--chart-1))" },
+    revenue: { label: t("simulation.series.revenue"), color: "hsl(var(--chart-2))" },
     totalCost: { label: t("simulation.series.totalCost"), color: "hsl(var(--chart-5))" },
   } satisfies ChartConfig;
 
@@ -66,16 +60,17 @@ export const BreakEvenChart = ({
           interval="preserveStartEnd"
           tickFormatter={(value: number) => t("simulation.monthLabel", { month: value })}
         />
-        <YAxis tickLine={false} axisLine={false} width={68} tickFormatter={money} />
+        <YAxis tickLine={false} axisLine={false} width={72} tickFormatter={money} />
         {kpis.breakevenMonthlyRevenue !== null ? (
           <ReferenceLine
             y={kpis.breakevenMonthlyRevenue}
-            stroke="hsl(var(--success))"
-            strokeDasharray="4 4"
+            stroke="hsl(var(--chart-3))"
+            strokeWidth={2}
+            strokeDasharray="5 4"
             label={{
               value: t("simulation.breakevenLine"),
               position: "insideTopRight",
-              fill: "hsl(var(--muted-foreground))",
+              fill: "hsl(var(--sky-ink))",
               fontSize: 11,
             }}
           />

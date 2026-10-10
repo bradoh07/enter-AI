@@ -17,15 +17,17 @@ export const EmptyState = ({
   action?: ReactNode;
   className?: string;
 }) => (
-  <Card className={cn("border-dashed shadow-none", className)}>
-    <CardContent className="flex flex-col items-center gap-3 px-6 py-14 text-center">
-      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-primary">
+  <Card className={cn("border-dashed border-border bg-card shadow-none", className)}>
+    <CardContent className="flex flex-col items-center gap-4 px-6 py-16 text-center">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-primary">
         <Icon className="h-5 w-5" />
       </div>
-      <div className="space-y-1">
-        <p className="text-sm font-medium text-foreground">{title}</p>
+      <div className="space-y-1.5">
+        <p className="font-display text-base font-semibold text-foreground">{title}</p>
         {description ? (
-          <p className="mx-auto max-w-md text-xs text-muted-foreground">{description}</p>
+          <p className="mx-auto max-w-md text-xs leading-relaxed text-muted-foreground">
+            {description}
+          </p>
         ) : null}
       </div>
       {action}

@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useAnalysisHistory } from "@/hooks/use-project-workspace";
 import { useProfile } from "@/hooks/use-profile";
 import { useProjects } from "@/hooks/use-projects";
-import { aiStatusLabel } from "@/lib/domain/options";
+import { aiStatusLabel, businessModelLabel } from "@/lib/domain/options";
 import { parseSimulationResult } from "@/lib/simulation/run";
 import { formatCurrency, formatPercent, resolveCurrencyLocale } from "@/lib/simulation/format";
 import type { CurrencyCode } from "@/lib/simulation/types";
@@ -237,7 +237,9 @@ const DashboardPage = () => {
                       </Link>
                       <p className="truncate text-xs text-muted-foreground">
                         {project.sectors.length > 0
-                          ? project.sectors.join(" · ")
+                          ? project.sectors
+                              .map((sector) => businessModelLabel(t, sector))
+                              .join(" · ")
                           : t("projects.noSectors")}
                       </p>
                     </div>

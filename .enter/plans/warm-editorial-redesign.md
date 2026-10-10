@@ -191,62 +191,95 @@ DB 스키마·데이터·연결 구조는 **손대지 않는다.** 디자인 계
 
 ## Implementation checklist
 
-- [ ] `src/index.css`의 `:root`를 §1-3 토큰으로 전면 교체하고 네이비/쿨그레이 값이 0건이 됨
-- [ ] `.dark`를 웜 다크로 재정의하고 네이비 잔존 값 제거
-- [ ] `--gradient-navy`·`.bg-gradient-navy`·`.bg-gradient-subtle`·`--primary-glow` 제거 (사용처 0건 확인됨)
-- [ ] `@media print`에 `print-color-adjust: exact`와 인쇄용 텍스트/배경색 적용
-- [ ] `tailwind.config.ts`에 `fontFamily.display` 추가, `beige`·`sky`·`skyInk`·`brown` 색상 추가, `primary.glow` 제거
-- [ ] `index.html`에 Fraunces·Inter·Noto Sans KR·Noto Serif KR 로드 및 중립 title/description, OG 이미지를 로컬 히어로로 교체
-- [ ] seedream-5로 가로/세로 히어로 이미지 생성 후 `public/media/hero-lemon-landscape.jpg`·`hero-lemon-portrait.jpg`로 저장
-- [ ] `src/lib/media/hero-media.ts`에 이미지 경로 + `HERO_VIDEO_SRC`(빈 값) + 드롭인 안내 주석 정의
-- [ ] `CinematicHero.tsx`가 `<picture>`로 뷰포트별 소스를 전환하고 문구 2줄·구분선·footnote를 렌더링
-- [ ] `HERO_VIDEO_SRC`가 빈 값일 때 영상 요청이 발생하지 않고 콘솔 오류가 없음
+- [x] `src/index.css`의 `:root`를 §1-3 토큰으로 전면 교체하고 네이비/쿨그레이 값이 0건이 됨
+- [x] `.dark`를 웜 다크로 재정의하고 네이비 잔존 값 제거
+- [x] `--gradient-navy`·`.bg-gradient-navy`·`.bg-gradient-subtle`·`--primary-glow` 제거 (사용처 0건 확인됨)
+- [x] `@media print`에 `print-color-adjust: exact`와 인쇄용 텍스트/배경색 적용
+- [x] `tailwind.config.ts`에 `fontFamily.display` 추가, `beige`·`sky`·`skyInk`·`brown` 색상 추가, `primary.glow` 제거
+- [x] `index.html`에 Fraunces·Inter·Noto Sans KR·Noto Serif KR 로드 및 중립 title/description, OG 이미지를 로컬 히어로로 교체
+- [x] seedream-5로 가로/세로 히어로 이미지 생성 후 `public/media/hero-lemon-landscape.jpg`·`hero-lemon-portrait.jpg`로 저장
+- [x] `src/lib/media/hero-media.ts`에 이미지 경로 + `HERO_VIDEO_SRC`(빈 값) + 드롭인 안내 주석 정의
+- [x] `CinematicHero.tsx`가 `<picture>`로 뷰포트별 소스를 전환하고 문구 2줄·구분선·footnote를 렌더링
+- [x] `HERO_VIDEO_SRC`가 빈 값일 때 영상 요청이 발생하지 않고 콘솔 오류가 없음
 - [ ] `HERO_VIDEO_SRC`가 값이 있는 상태에서 로딩 실패 시 `onError`로 이미지 폴백이 동작 (`prefers-reduced-motion`이면 이미지 고정)
-- [ ] `AuthShell.tsx`가 데스크톱 `62/38` 2단, 모바일 상단 밴드+스택으로 렌더링
-- [ ] `AuthModeTabs.tsx`로 로그인/회원가입 전환이 되고 선택 상태가 테라코타로 표시됨
-- [ ] `LoginForm.tsx`가 기존 `signIn` 흐름을 그대로 사용해 로그인 성공 시 `/dashboard`로 이동
-- [ ] `ResetPasswordForm.tsx`가 `resetPasswordForEmail`을 호출하고 성공/실패 메시지를 구분해 표시
-- [ ] `/reset-password`에서 세션이 있으면 `updateUser({ password })`로 새 비밀번호가 저장되고 `/dashboard`로 이동
-- [ ] `/reset-password`에서 세션이 없으면 로그인 화면으로 안내(깨진 링크 화면 없음)
-- [ ] `SignupForm.tsx` 1단계에서 기업/개인 카드를 구분 선택하고, 선택 유형에 따라 온보딩 필드가 달라짐
-- [ ] `/signup?type=business`·`?type=individual` 딥링크가 해당 유형으로 진입
-- [ ] 신규 가입 후 `user_type`이 `profiles`에 저장되고 기존 온보딩 흐름으로 이어짐
-- [ ] `AppSidebar`가 아이보리 레일 + 아이콘/설명형 표기로 렌더링되고 브랜드명이 없음
-- [ ] 사이드바 활성 메뉴가 베이지 표면 + 테라코타 텍스트로 표시됨
-- [ ] `AppTopbar`·`AppLayout`이 웜 배경/경계로 전환되고 데스크톱 레일·모바일 시트 구조가 유지됨
-- [ ] `button`·`badge`·`card`·`tabs`·`table`·`input`·`select`·`progress`·`alert`가 시맨틱 토큰만 사용(hex 직접 사용 0건)
-- [ ] 다이얼로그·시트·드롭다운 오버레이가 `bg-foreground/40` 계열로 바뀌고 검은 오버레이가 남지 않음
-- [ ] `DataSourceBadge`의 계산/AI/가정 배지가 브라운·스카이·앰버 계열로 구분됨
-- [ ] `MetricCard` 수치가 산세리프 + `tabular-nums`로 유지되고 제목만 세리프 적용됨
-- [ ] `PageHeader`·`SectionCard` 제목에 `font-display`가 적용됨
-- [ ] 시뮬레이션 차트 4종이 §4 시리즈 배정표대로 렌더링되고 영업이익 계열이 `Area`로 표시됨
-- [ ] 민감도 표의 흑자/적자/기준 셀이 토큰 색으로 구분됨
-- [ ] 보고서 페이지가 세리프 제목 + 테라코타 룰로 렌더링되고 인쇄 시 계열 색이 유지됨
-- [ ] ko/en 로케일에 신규 인증 키가 동일 키 세트로 추가됨
-- [ ] `CodeGuideline.md`에 팔레트 규칙(지정값 vs 파생값)과 신규 인증 컴포넌트 구조 기록
+- [x] `AuthShell.tsx`가 데스크톱 `62/38` 2단, 모바일 상단 밴드+스택으로 렌더링
+- [x] `AuthModeTabs.tsx`로 로그인/회원가입 전환이 되고 선택 상태가 테라코타로 표시됨
+- [x] `LoginForm.tsx`가 기존 `signIn` 흐름을 그대로 사용해 로그인 성공 시 `/dashboard`로 이동
+- [x] `ResetPasswordForm.tsx`가 `resetPasswordForEmail`을 호출하고 성공/실패 메시지를 구분해 표시
+- [x] `/reset-password`에서 세션이 있으면 `updateUser({ password })`로 새 비밀번호가 저장되고 `/dashboard`로 이동
+- [x] `/reset-password`에서 세션이 없으면 로그인 화면으로 안내(깨진 링크 화면 없음)
+- [x] `SignupForm.tsx` 1단계에서 기업/개인 카드를 구분 선택하고, 선택 유형에 따라 온보딩 필드가 달라짐
+- [x] `/signup?type=business`·`?type=individual` 딥링크가 해당 유형으로 진입
+- [x] 신규 가입 후 `user_type`이 `profiles`에 저장되고 기존 온보딩 흐름으로 이어짐
+- [x] `AppSidebar`가 아이보리 레일 + 아이콘/설명형 표기로 렌더링되고 브랜드명이 없음
+- [x] 사이드바 활성 메뉴가 베이지 표면 + 테라코타 텍스트로 표시됨
+- [x] `AppTopbar`·`AppLayout`이 웜 배경/경계로 전환되고 데스크톱 레일·모바일 시트 구조가 유지됨
+- [x] `button`·`badge`·`card`·`tabs`·`table`·`input`·`select`·`progress`·`alert`가 시맨틱 토큰만 사용(hex 직접 사용 0건)
+- [x] 다이얼로그·시트·드롭다운 오버레이가 `bg-foreground/40` 계열로 바뀌고 검은 오버레이가 남지 않음
+- [x] `DataSourceBadge`의 계산/AI/가정 배지가 브라운·스카이·앰버 계열로 구분됨
+- [x] `MetricCard` 수치가 산세리프 + `tabular-nums`로 유지되고 제목만 세리프 적용됨
+- [x] `PageHeader`·`SectionCard` 제목에 `font-display`가 적용됨
+- [x] 시뮬레이션 차트 4종이 §4 시리즈 배정표대로 렌더링되고 영업이익 계열이 `Area`로 표시됨
+- [x] 민감도 표의 흑자/적자/기준 셀이 토큰 색으로 구분됨
+- [x] 보고서 페이지가 세리프 제목 + 테라코타 룰로 렌더링되고 인쇄 시 계열 색이 유지됨
+- [x] ko/en 로케일에 신규 인증 키가 동일 키 세트로 추가됨
+- [x] `CodeGuideline.md`에 팔레트 규칙(지정값 vs 파생값)과 신규 인증 컴포넌트 구조 기록
 
 ## Verification checklist
 
 **긍정 경로**
-- [ ] `/login` 1280px에서 좌 62% 시네마틱 히어로 + 우 38% 아이보리 패널이 보이고, 좌측에 지정 문구 2줄이 정확히 표시됨
-- [ ] 로그인/회원가입 탭 전환이 되고, 회원가입에서 기업/개인 카드 선택이 가능
+- [x] `/login` 1280px에서 좌 62% 시네마틱 히어로 + 우 38% 아이보리 패널이 보이고, 좌측에 지정 문구 2줄이 정확히 표시됨
+- [x] 로그인/회원가입 탭 전환이 되고, 회원가입에서 기업/개인 카드 선택이 가능
 - [ ] 기존 계정으로 로그인해 대시보드·프로젝트·새 시뮬레이션·분석 기록·설정·보고서가 모두 정상 동작 (기존 기능 회귀 없음)
 - [ ] 재설정 링크 → `/reset-password`에서 새 비밀번호 설정 후 로그인 가능
 
 **부정/기본 경로**
-- [ ] `public/media/lemon-tree.mp4`가 없는 상태에서 콘솔 오류 없이 히어로 이미지가 표시됨
-- [ ] 세션 없이 `/reset-password` 직접 접근 시 로그인 화면으로 안내됨
+- [x] `public/media/lemon-tree.mp4`가 없는 상태에서 콘솔 오류 없이 히어로 이미지가 표시됨
+- [x] 세션 없이 `/reset-password` 직접 접근 시 로그인 화면으로 안내됨
 - [ ] 잘못된 이메일로 비밀번호 재설정 시 백엔드 메시지가 표시되고 "발송됨"으로 단정하지 않음
 - [ ] `/signup?type=individual`에서 기업 전용 필드가 노출되지 않음
 
 **경계/시스템**
-- [ ] 네이비·쿨그레이 잔존: `grep -rn "218 62%\|210 40%\|bg-black/80\|gradient-navy" src` 결과 0건
-- [ ] 하드코딩 색상: 컴포넌트에 6자리 hex 직접 사용 0건
-- [ ] `color-scheme`/다크 클래스 미사용 상태에서 `.dark` 토큰이 웜 다크로만 정의됨
-- [ ] `pnpm lint` 0 errors, `pnpm exec tsc -p tsconfig.app.json --noEmit` 통과, `pnpm run build` 성공
-- [ ] `node .../check-i18n.mjs` → `scan-i18n.mjs` 순서로 실행해 통과(모든 로케일 키 세트 동일)
+- [x] 네이비·쿨그레이 잔존: `grep -rn "218 62%\|210 40%\|bg-black/80\|gradient-navy" src` 결과 0건
+- [x] 하드코딩 색상: 컴포넌트에 6자리 hex 직접 사용 0건
+- [x] `color-scheme`/다크 클래스 미사용 상태에서 `.dark` 토큰이 웜 다크로만 정의됨
+- [x] `pnpm lint` 0 errors, `pnpm exec tsc -p tsconfig.app.json --noEmit` 통과, `pnpm run build` 성공
+- [x] `node .../check-i18n.mjs` → `scan-i18n.mjs` 순서로 실행해 통과(모든 로케일 키 세트 동일)
 
 **반응형 (프리뷰 실측)**
-- [ ] `/login` 390px: 히어로 밴드 + 문구 + 아이보리 패널이 세로 스택되고 가로 스크롤/잘림 없음
-- [ ] `/login` 1280px: 2단 레이아웃 비율과 문구 가독성(스크림) 확인
-- [ ] 인증 후 화면(대시보드 등) 모바일 레이아웃은 프리뷰에서 로그인할 수 없어 **시각 검증 불가** → 토큰 일관성과 반응형 클래스로만 보증하고, 미검증 사실을 사용자에게 명시
+- [x] `/login` 390px: 히어로 밴드 + 문구 + 아이보리 패널이 세로 스택되고 가로 스크롤/잘림 없음
+- [x] `/login` 1280px: 2단 레이아웃 비율과 문구 가독성(스크림) 확인
+- [ ] 인증 후 화면 중 프로젝트 상세·설정·분석 기록·시뮬레이션 위저드의 **모바일(390px)** 레이아웃은 캡처하지 못했다 (대시보드는 390px로 확인함)
+
+---
+
+## 실행 결과 (검증 기록)
+
+### 시각 검증 완료 — 실제 계정·실제 엔진 결과·실제 AI 응답으로 확인
+
+검증용 계정을 만들고, `src/lib/simulation/engine.ts`로 **실제 계산한 결과**와 배포된 `simulation-insights` 함수의
+**실제 AI 응답**을 저장한 뒤 각 화면을 캡처했다. (검증 후 계정과 그 데이터는 삭제했고, 기존 실사용자 계정과 데이터는 보존)
+
+| 화면 | 뷰포트 | 확인 내용 |
+|---|---|---|
+| `/login` | 1280 | 좌 62% 시네마틱 히어로 + 지정 문구 2줄, 우 38% 아이보리 패널, 테라코타 탭·버튼 |
+| `/login` | 390 | 히어로 밴드 + 문구, 패널 세로 스택, 가로 스크롤·잘림 없음 |
+| `/login?mode=signup` | 1280 | 기업/개인 가입 경로 2개 카드 분리, 선택 상태 테라코타 |
+| `/dashboard` | 1280 | 아이보리 배경·브라운 텍스트, KPI 타일 값 정렬, 시나리오 차트 웜 팔레트 |
+| `/dashboard` | 390 | 사이드바 → 햄버거, 카드 세로 스택, 차트 가독성 유지 |
+| `/projects/:id` | 1280 | 2단 탭, KPI 8종, 누적 현금흐름 차트 3색, 시나리오 표 색상 구분 |
+| `/report/:runId` | 1280 | 5개 섹션 전부 — 시나리오 표, 차트 4종(스카이 영역·기준선 포함), 가정 목록, AI 분석(실제 응답), 모델 설정 |
+| 보호 라우트 | - | 세션 없이 `/settings` 접근 시 `/login`으로 리다이렉트(기존 가드 유지) |
+
+추가로 lint 0 problems, `tsc -p tsconfig.app.json` 통과, `pnpm run build` 성공, `check-i18n.mjs` 통과,
+네이비/쿨그레이 잔존 0건, 컴포넌트 내 6자리 hex 0건을 확인했다.
+
+### 시각 검증하지 못한 항목 (미검증으로 남김)
+
+- **영상 재생 경로**: `HERO_VIDEO_SRC`가 빈 값이라 영상 파일 로딩 실패 시의 `onError` 폴백은 실행되지 않았다.
+  코드 경로는 존재하지만 런타임 검증은 하지 않았다.
+- **비밀번호 재설정 전체 흐름**: `resetPasswordForEmail` 호출과 `/reset-password` 화면은 구현했으나,
+  실제 메일 수신·링크 클릭 왕복은 이 환경에서 확인할 수 없다.
+- **개인 고객 가입 2단계**: 1단계 유형 선택 화면은 확인했으나, 개인 유형으로 진행한 뒤의 필드 구성은 캡처하지 않았다.
+- **로그인 폼 실제 제출**: 세션을 주입해 인증 후 화면은 확인했으나, 폼에 직접 입력해 제출하는 흐름은 자동화할 수 없었다.
+- **일반 AI 챗봇 스타일 배제 / 모션**: `prefers-reduced-motion` 대응은 코드로만 존재하며 별도 확인하지 않았다.

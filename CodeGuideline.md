@@ -64,6 +64,9 @@ project-root/
 - **src/providers/**: React context providers. `auth-provider.tsx` owns the session and exposes `useAuth()`.
 - **src/pages/**: All route-level pages.  
   - *Each page should have its own subdirectory if it contains more than a single file or has related logic/components.*
+  - **pages/auth/**: the shared sign-in surface — `AuthShell` (62/38 two-column layout),
+    `CinematicHero`, `AuthPanel` (view state), `LoginForm`, `SignupForm`, `ResetPasswordForm`,
+    `SetPasswordForm`. `pages/login`, `pages/signup` and `pages/reset-password` are thin wrappers.
   - **pages/projects/detail/**, **pages/simulations/new/**: page-local subcomponents live beside their page.
 - **supabase/functions/**: Backend functions, one responsibility each. Read the AI/backend skills before editing.
 - **src/App.tsx**: Sets up global providers.
@@ -138,6 +141,50 @@ Whenever a new module (such as a component, hook, or utility) or a new page is a
 - **Documentation:**  
   - Add comments for complex logic.
   - Document the purpose of each module at the top of the file if not obvious.
+
+## Design system rule (warm Mediterranean editorial)
+
+The five brand colours are declared once in `src/index.css` and are never used
+directly in components — everything reads semantic tokens:
+
+| Exact value | Token | Role |
+|---|---|---|
+| #5E3013 deep brown | `--brand-brown` | headings, body copy, emphasis |
+| #DDAC80 warm beige | `--brand-beige` | decorative rules, secondary button surface |
+| #A56733 terracotta | `--brand-terracotta` | selection borders, focus, icon accents |
+| #F8F4EC ivory | `--brand-ivory` | page background |
+| #7DDBF4 sky blue | `--sky` | chart fills, areas, reference lines |
+
+**The one deviation rule:** fills and decoration use the exact brand value, while
+text and control boundaries use a one-step deeper tone of the same hue
+(`--primary` for terracotta buttons, `--border`/`--input` for hairlines,
+`--sky-ink` where sky must carry a stroke or text). This is what keeps every text
+and control pair at or above the contrast it needs — `#A56733` on ivory is
+4.2:1, which fails AA for button labels, and `#DDAC80` borders at 1.9:1 are too
+faint to read as a field boundary.
+
+Additional fixed rules:
+
+- Titles use `.font-display` (Fraunces → Noto Serif KR); body copy, labels,
+  table cells and **every figure** stay in the sans stack with `.tabular`.
+- Scenario series always use `--scenario-*`, so optimism reads as the same colour
+  in every chart. `--chart-*` is for non-scenario series only.
+- Sky blue stays scarce: bar/area fills, reference lines, and the AI badge.
+- No gradients except `.hero-scrim`, which exists to keep the sign-in copy
+  legible over the hero photograph.
+- `.dark` values are warm-dark only; no theme toggle is offered.
+
+## Sign-in media and copy
+
+- Hero stills live in `public/media/` and are listed in `src/lib/media/hero-media.ts`.
+  To use a clip, drop `public/media/lemon-tree.mp4` (muted, seamless loop) and point
+  `HERO_VIDEO_SRC` at it; the hero autoplays it and falls back to the still on error
+  or when `prefers-reduced-motion` is set. While the constant is empty no video
+  request is made.
+- The sign-in hero carries the product statement (`auth.tagline.primary` /
+  `auth.tagline.secondary`) instead of a brand mark, and both lines are stored
+  identically in every locale because they always appear together. No invented
+  product name is used anywhere in the interface.
 
 ## Domain notes
 

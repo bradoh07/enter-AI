@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 
-import { DataSourceBadge } from "@/components/common/DataSourceBadge";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -98,10 +97,9 @@ export const ScenarioSummaryTable = ({
 
   return (
     <div className={className}>
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <DataSourceBadge source="computed" />
-        <span className="text-xs text-muted-foreground">{t("simulation.computedNotice")}</span>
-      </div>
+      <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
+        {t("simulation.computedNotice")}
+      </p>
 
       <div className="overflow-x-auto">
         <Table>

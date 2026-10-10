@@ -1,11 +1,4 @@
-import {
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  Line,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -19,7 +12,13 @@ import {
 import { formatCompactCurrency, resolveCurrencyLocale } from "@/lib/simulation/format";
 import type { CurrencyCode, ScenarioKey, SimulationResult } from "@/lib/simulation/types";
 
-/** Yearly revenue, total cost and operating profit for one scenario. */
+/**
+ * Yearly revenue, total cost and operating profit for one scenario.
+ *
+ * Revenue and cost are bars (bulk), operating profit is an area: it can be
+ * negative, and the soft sky wash keeps the profitable years obvious at a
+ * glance without competing with the bars for attention.
+ */
 export const ProfitChart = ({
   result,
   currency,
@@ -40,7 +39,7 @@ export const ProfitChart = ({
     cost: { label: t("simulation.series.cost"), color: "hsl(var(--chart-4))" },
     operatingProfit: {
       label: t("simulation.series.operatingProfit"),
-      color: "hsl(var(--chart-1))",
+      color: "hsl(var(--chart-3))",
     },
   } satisfies ChartConfig;
 
@@ -57,27 +56,27 @@ export const ProfitChart = ({
           tickMargin={8}
           tickFormatter={(value: number) => t("simulation.yearLabel", { year: value })}
         />
-        <YAxis tickLine={false} axisLine={false} width={68} tickFormatter={money} />
+        <YAxis tickLine={false} axisLine={false} width={72} tickFormatter={money} />
         <ChartTooltip
           content={
             <ChartTooltipContent
               indicator="dot"
-              labelFormatter={(label) =>
-                t("simulation.yearLabel", { year: Number(label) })
-              }
+              labelFormatter={(label) => t("simulation.yearLabel", { year: Number(label) })}
               formatter={(value) => money(value)}
             />
           }
         />
         <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="revenue" fill="var(--color-revenue)" radius={3} />
-        <Bar dataKey="cost" fill="var(--color-cost)" radius={3} />
-        <Line
+        <Bar dataKey="revenue" fill="var(--color-revenue)" radius={2} />
+        <Bar dataKey="cost" fill="var(--color-cost)" radius={2} />
+        <Area
           type="monotone"
           dataKey="operatingProfit"
-          stroke="var(--color-operatingProfit)"
+          stroke="hsl(var(--chart-5))"
           strokeWidth={2}
-          dot={{ r: 3 }}
+          fill="var(--color-operatingProfit)"
+          fillOpacity={0.3}
+          dot={false}
         />
       </ComposedChart>
     </ChartContainer>

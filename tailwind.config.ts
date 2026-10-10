@@ -20,6 +20,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				/* Body copy, labels and every figure. */
 				sans: [
 					'Inter',
 					'-apple-system',
@@ -30,6 +31,14 @@ export default {
 					'Malgun Gothic',
 					'system-ui',
 					'sans-serif'
+				],
+				/* Page and section titles only — see index.css .font-display. */
+				display: [
+					'Fraunces',
+					'Noto Serif KR',
+					'Georgia',
+					'Times New Roman',
+					'serif'
 				]
 			},
 			colors: {
@@ -38,10 +47,19 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				/* Exact brand values, for fills and decoration only. Text and
+				   control boundaries use the semantic tokens instead. */
+				brown: 'hsl(var(--brand-brown))',
+				beige: 'hsl(var(--brand-beige))',
+				ivory: 'hsl(var(--brand-ivory))',
+				terracotta: 'hsl(var(--brand-terracotta))',
+				skyblue: {
+					DEFAULT: 'hsl(var(--sky))',
+					ink: 'hsl(var(--sky-ink))'
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
