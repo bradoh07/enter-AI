@@ -58,19 +58,13 @@ export const CinematicHero = () => {
 
       <div className="hero-scrim absolute inset-0" aria-hidden="true" />
 
-      <div className="relative flex h-full flex-col justify-end gap-8 p-8 lg:p-14">
+      <div className="relative flex h-full flex-col justify-end p-8 lg:p-14">
         <div className="max-w-xl space-y-4">
           <h2 className="font-display text-[1.75rem] font-semibold leading-tight text-ivory sm:text-[2.1rem] lg:text-[2.6rem]">
             {t("auth.tagline.primary")}
           </h2>
           <p className="text-sm leading-relaxed text-ivory/80 sm:text-base lg:text-lg">
             {t("auth.tagline.secondary")}
-          </p>
-        </div>
-
-        <div className="border-t border-ivory/25 pt-5">
-          <p className="max-w-md text-[11px] leading-relaxed text-ivory/65">
-            {t("auth.brand.footnote")}
           </p>
         </div>
       </div>
