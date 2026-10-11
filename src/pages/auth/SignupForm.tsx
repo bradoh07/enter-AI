@@ -46,15 +46,15 @@ export const SignupForm = ({
     event.preventDefault();
     setSubmitting(true);
     setError(null);
-    const message = await signUp({
+    const result = await signUp({
       email: email.trim(),
       password,
       userType,
       displayName: displayName.trim(),
     });
     setSubmitting(false);
-    if (message) {
-      setError(message);
+    if (result) {
+      setError(result.offline ? t("auth.backendUnavailable") : result.message);
       return;
     }
     navigate("/onboarding", { replace: true });

@@ -10,6 +10,7 @@ import {
 import type { Session, User } from "@supabase/supabase-js";
 
 import { supabase } from "@/integrations/supabase/client";
+import { isBackendUnavailable } from "@/lib/api/errors";
 import type { UserType } from "@/lib/api/types";
 
 type SignUpArgs = {
@@ -19,17 +20,31 @@ type SignUpArgs = {
   displayName: string;
 };
 
+/**
+ * `offline` marks a request that never reached the backend — a paused instance,
+ * not a wrong password. The forms use it to show an actionable message.
+ */
+export type AuthError = {
+  message: string;
+  offline: boolean;
+};
+
+type AuthErrorLike = { message: string; status?: number; name?: string } | null;
+
+const toAuthError = (error: AuthErrorLike): AuthError | null =>
+  error ? { message: error.message, offline: isBackendUnavailable(error) } : null;
+
 type AuthContextValue = {
   user: User | null;
   session: Session | null;
   initializing: boolean;
-  signIn: (email: string, password: string) => Promise<string | null>;
-  signUp: (args: SignUpArgs) => Promise<string | null>;
+  signIn: (email: string, password: string) => Promise<AuthError | null>;
+  signUp: (args: SignUpArgs) => Promise<AuthError | null>;
   signOut: () => Promise<void>;
   /** Sends the account-recovery email. Returns an error message, or null when accepted. */
-  requestPasswordReset: (email: string) => Promise<string | null>;
+  requestPasswordReset: (email: string) => Promise<AuthError | null>;
   /** Sets a new password for the signed-in user (used by the recovery link). */
-  setPassword: (password: string) => Promise<string | null>;
+  setPassword: (password: string) => Promise<AuthError | null>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -62,7 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signIn = useCallback(async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return error ? error.message : null;
+    return toAuthError(error);
   }, []);
 
   const signUp = useCallback(async ({ email, password, userType, displayName }: SignUpArgs) => {
@@ -74,7 +89,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         data: { user_type: userType, display_name: displayName },
       },
     });
-    return error ? error.message : null;
+    return toAuthError(error);
   }, []);
 
   const signOut = useCallback(async () => {
@@ -87,12 +102,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
     });
-    return error ? error.message : null;
+    return toAuthError(error);
   }, []);
 
   const setPassword = useCallback(async (password: string) => {
     const { error } = await supabase.auth.updateUser({ password });
-    return error ? error.message : null;
+    return toAuthError(error);
   }, []);
 
   const value = useMemo<AuthContextValue>(

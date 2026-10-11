@@ -26,10 +26,10 @@ export const ResetPasswordForm = ({ onBackToLogin }: { onBackToLogin: () => void
     event.preventDefault();
     setSubmitting(true);
     setError(null);
-    const message = await requestPasswordReset(email.trim());
+    const result = await requestPasswordReset(email.trim());
     setSubmitting(false);
-    if (message) {
-      setError(message);
+    if (result) {
+      setError(result.offline ? t("auth.backendUnavailable") : result.message);
       return;
     }
     setSent(true);

@@ -33,10 +33,10 @@ export const SetPasswordForm = () => {
     }
 
     setSubmitting(true);
-    const message = await savePassword(password);
+    const result = await savePassword(password);
     setSubmitting(false);
-    if (message) {
-      setError(message);
+    if (result) {
+      setError(result.offline ? t("auth.backendUnavailable") : result.message);
       return;
     }
     navigate("/dashboard", { replace: true });

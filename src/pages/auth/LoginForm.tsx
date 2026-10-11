@@ -29,10 +29,10 @@ export const LoginForm = ({
     event.preventDefault();
     setSubmitting(true);
     setError(null);
-    const message = await signIn(email.trim(), password);
+    const result = await signIn(email.trim(), password);
     setSubmitting(false);
-    if (message) {
-      setError(message);
+    if (result) {
+      setError(result.offline ? t("auth.backendUnavailable") : result.message);
       return;
     }
     navigate("/dashboard", { replace: true });
