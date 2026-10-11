@@ -174,6 +174,24 @@ Additional fixed rules:
   legible over the hero photograph.
 - `.dark` values are warm-dark only; no theme toggle is offered.
 
+## Brand identity (Renasci)
+
+- The product name is **Renasci**, set in the script face — Alex Brush, then
+  Segoe Script / cursive fallbacks, exposed as `font-script`.
+- The wordmark is pure white by brand specification: `--brand-white` (`#FFFFFF`),
+  used through `text-brandwhite` and nowhere else.
+- White cannot sit on this app's ivory surfaces, so the wordmark always carries
+  its own deep-brown plate — `src/components/common/BrandMark.tsx`. That is the
+  only place a brand colour is used as a ground for type, and it exists so the
+  white requirement and legibility can both hold.
+- Placement: the rail head on desktop, the top bar below `lg`. One wordmark per
+  viewport, never duplicated.
+- The slogan is exactly `Reimagine What's Possible.` (`auth.tagline.primary`),
+  set small and letterspaced in the sans stack beneath the wordmark. In the
+  sign-in hero the lockup is centred.
+- `common.brandName` holds the wordmark text so every locale renders it
+  identically.
+
 ## Sign-in media and copy
 
 - Hero stills live in `public/media/` and are listed in `src/lib/media/hero-media.ts`.
