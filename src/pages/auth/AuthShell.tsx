@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 import { CinematicHero } from "./CinematicHero";
+import { BackendStatusPill } from "@/components/common/BackendStatusPill";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 /**
@@ -24,7 +25,8 @@ export const AuthShell = ({ children }: { children: ReactNode }) => {
       </section>
 
       <section className="flex flex-col">
-        <div className="flex justify-end px-7 py-5 lg:px-12">
+        <div className="flex flex-wrap items-center justify-end gap-2 px-7 py-5 lg:px-12">
+          <BackendStatusPill />
           <LanguageSwitcher className="w-[9.5rem]" />
         </div>
 

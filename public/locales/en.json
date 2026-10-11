@@ -487,5 +487,9 @@
   "auth.signup.changeType": "Change",
   "common.passwordMismatch": "The two passwords do not match.",
   "common.brandName": "Renasci",
-  "auth.backendUnavailable": "The backend is paused, so sign-in and sign-up cannot be handled right now. Resume the instance in your workspace, then try again. Your data is safe."
+  "auth.backendUnavailable": "The backend is paused, so sign-in and sign-up cannot be handled right now. Resume the instance in your workspace, then try again. Your data is safe.",
+  "status.backend.online": "Backend connected",
+  "status.backend.offline": "Backend paused",
+  "status.backend.checking": "Checking backend",
+  "status.backend.recheck": "Check again"
 }
