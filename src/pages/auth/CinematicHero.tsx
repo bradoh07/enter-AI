@@ -11,8 +11,9 @@ import {
  * Cinematic side of the sign-in screen.
  *
  * A still from the Mediterranean lemon-grove set carries the mood; if a clip is
- * configured it plays muted and looping instead. Nothing here is a brand mark —
- * the copy is the product promise, exactly as specified.
+ * configured it plays muted and looping instead. The brand lockup is centred —
+ * the Renasci wordmark in white script, with the slogan set small and quiet
+ * beneath it — and the scrim is shaped around that composition.
  */
 export const CinematicHero = () => {
   const { t } = useTranslation();
@@ -58,18 +59,18 @@ export const CinematicHero = () => {
 
       <div className="hero-scrim absolute inset-0" aria-hidden="true" />
 
-      <div className="relative flex h-full flex-col justify-end gap-8 p-8 lg:p-14">
-        <div className="max-w-xl space-y-4">
-          <h2 className="font-display text-[1.75rem] font-semibold leading-tight text-ivory sm:text-[2.1rem] lg:text-[2.6rem]">
+      <div className="relative flex h-full flex-col px-8 py-9 lg:px-14 lg:py-12">
+        <div className="flex flex-1 flex-col items-center justify-center text-center">
+          <p className="font-script text-[3.5rem] leading-[1.05] text-brandwhite sm:text-[4.5rem] lg:text-[5.5rem]">
+            {t("common.brandName")}
+          </p>
+          <p className="mt-5 max-w-md text-xs font-medium leading-relaxed tracking-[0.14em] text-ivory/90 sm:mt-6 sm:text-sm lg:text-base">
             {t("auth.tagline.primary")}
-          </h2>
-          <p className="text-sm leading-relaxed text-ivory/80 sm:text-base lg:text-lg">
-            {t("auth.tagline.secondary")}
           </p>
         </div>
 
-        <div className="border-t border-ivory/25 pt-5">
-          <p className="max-w-md text-[11px] leading-relaxed text-ivory/65">
+        <div className="mx-auto w-full max-w-md border-t border-ivory/25 pt-5">
+          <p className="text-center text-[11px] leading-relaxed text-ivory/65">
             {t("auth.brand.footnote")}
           </p>
         </div>

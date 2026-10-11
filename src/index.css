@@ -20,6 +20,7 @@
     --brand-terracotta: 27 53% 42%; /* #A56733 */
     --brand-ivory: 40 46% 95%; /* #F8F4EC */
     --brand-sky: 193 84% 72%; /* #7DDBF4 */
+    --brand-white: 0 0% 100%; /* #FFFFFF — the Renasci wordmark */
 
     /* Surfaces */
     --background: 40 46% 95%; /* ivory */
@@ -210,17 +211,17 @@
      phrases sit on the darkest part, with a left wash because the copy is
      left-aligned. */
   .hero-scrim {
-    background-image: linear-gradient(
-        to top,
-        hsl(23 66% 11% / 0.72) 0%,
-        hsl(23 66% 13% / 0.26) 40%,
-        hsl(23 66% 15% / 0) 80%
+    background-image: radial-gradient(
+        ellipse 80% 64% at 50% 50%,
+        hsl(23 66% 10% / 0.64) 0%,
+        hsl(23 66% 10% / 0.34) 54%,
+        hsl(23 66% 10% / 0) 100%
       ),
       linear-gradient(
-        to right,
-        hsl(23 66% 11% / 0.44) 0%,
-        hsl(23 66% 11% / 0.04) 46%,
-        hsl(23 66% 11% / 0) 100%
+        to top,
+        hsl(23 66% 10% / 0.72) 0%,
+        hsl(23 66% 12% / 0.22) 42%,
+        hsl(23 66% 14% / 0) 78%
       );
   }
 }

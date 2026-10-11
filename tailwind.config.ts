@@ -32,6 +32,13 @@ export default {
 					'system-ui',
 					'sans-serif'
 				],
+				/* The Renasci logotype only. */
+				script: [
+					'Alex Brush',
+					'Segoe Script',
+					'Brush Script MT',
+					'cursive'
+				],
 				/* Page and section titles only — see index.css .font-display. */
 				display: [
 					'Fraunces',
@@ -52,6 +59,8 @@ export default {
 				brown: 'hsl(var(--brand-brown))',
 				beige: 'hsl(var(--brand-beige))',
 				ivory: 'hsl(var(--brand-ivory))',
+				/* Pure #FFFFFF, used only by the Renasci wordmark. */
+				brandwhite: 'hsl(var(--brand-white))',
 				terracotta: 'hsl(var(--brand-terracotta))',
 				skyblue: {
 					DEFAULT: 'hsl(var(--sky))',

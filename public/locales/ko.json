@@ -458,7 +458,7 @@
   "intake.help.workingCapitalMonths": "재고나 미수금으로 묶여 있는 매출 개월분입니다.",
   "notFound.title": "페이지를 찾을 수 없습니다",
   "notFound.actions.backHome": "홈으로 돌아가기",
-  "auth.tagline.primary": "Before you build, understand.",
+  "auth.tagline.primary": "Reimagine What’s Possible.",
   "auth.tagline.secondary": "사업을 시작하기 전에, 가능성을 분석하다.",
   "auth.hero.label": "제품 메시지",
   "auth.mode.label": "로그인 또는 회원가입",
@@ -485,5 +485,6 @@
   "auth.signup.continueWith": "{{type}}(으)로 계속",
   "auth.signup.subtitleFor": "{{type}} 계정을 만들고 있습니다.",
   "auth.signup.changeType": "변경",
-  "common.passwordMismatch": "비밀번호가 일치하지 않습니다."
+  "common.passwordMismatch": "비밀번호가 일치하지 않습니다.",
+  "common.brandName": "Renasci"
 }

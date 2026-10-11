@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { BarChart3 } from "lucide-react";
 
 import { primaryNavItems } from "./nav-items";
+import { BrandMark } from "@/components/common/BrandMark";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { cn } from "@/lib/utils";
 
@@ -46,23 +46,19 @@ export const SidebarNav = ({ onNavigate }: { onNavigate?: () => void }) => {
 };
 
 /**
- * The rail carries a descriptive label rather than a brand mark — there is no
- * invented product name anywhere in the interface.
+ * Head of the rail: the Renasci mark plus the line describing what the product
+ * does. The mark keeps its own dark plate so the white logotype stays legible on
+ * the ivory rail.
  */
 export const SidebarBrand = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex items-center gap-2.5 px-2 py-1">
-      <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary/12">
-        <BarChart3 className="h-4 w-4 text-primary" />
-      </div>
-      <div className="min-w-0">
-        <p className="truncate font-display text-sm font-semibold text-sidebar-primary">
-          {t("common.appName")}
-        </p>
-        <p className="truncate text-[11px] text-muted-foreground">{t("common.appTagline")}</p>
-      </div>
+    <div className="flex flex-col items-start gap-2.5 px-2 py-1">
+      <BrandMark size="md" />
+      <p className="text-[11px] leading-snug text-muted-foreground">
+        {t("common.appTagline")}
+      </p>
     </div>
   );
 };

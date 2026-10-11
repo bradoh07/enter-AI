@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { BrandMark } from "@/components/common/BrandMark";
 import { SidebarBrand, SidebarFooter, SidebarNav } from "./AppSidebar";
 import { useAuth } from "@/providers/auth-provider";
 import { useProfile } from "@/hooks/use-profile";
@@ -45,6 +46,10 @@ export const AppTopbar = () => {
           </div>
         </SheetContent>
       </Sheet>
+
+      {/* Below `lg` the rail is hidden, so the mark moves into the bar. On
+          desktop it stays in the rail only, and the wordmark never doubles up. */}
+      <BrandMark size="sm" className="lg:hidden" />
 
       <div className="flex-1" />
 

@@ -458,7 +458,7 @@
   "intake.help.workingCapitalMonths": "Months of revenue tied up in inventory or receivables.",
   "notFound.title": "Page not found",
   "notFound.actions.backHome": "Back to home",
-  "auth.tagline.primary": "Before you build, understand.",
+  "auth.tagline.primary": "Reimagine What’s Possible.",
   "auth.tagline.secondary": "Analyse the possibilities before you start a business.",
   "auth.hero.label": "Product statement",
   "auth.mode.label": "Sign in or create an account",
@@ -485,5 +485,6 @@
   "auth.signup.continueWith": "Continue as {{type}}",
   "auth.signup.subtitleFor": "Creating a {{type}} account.",
   "auth.signup.changeType": "Change",
-  "common.passwordMismatch": "The two passwords do not match."
+  "common.passwordMismatch": "The two passwords do not match.",
+  "common.brandName": "Renasci"
 }
